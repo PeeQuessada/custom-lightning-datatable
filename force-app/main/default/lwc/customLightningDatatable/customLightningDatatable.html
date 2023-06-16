@@ -1,5 +1,40 @@
 <template>
-    
+    <table class="slds-table slds-table_cell-buffer slds-table_bordered"
+        aria-label="Example default base table of Opportunities">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <template for:each={columns} for:item="column">
+                    <th class="" scope="col" key={column.fieldName}>
+                        <div class="slds-truncate" title={column.fieldName}>
+                            <c-custom-lightning-datatable-column column={column}></c-custom-lightning-datatable-column>
+                        </div>
+                    </th>
+                </template>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={rowsWithColumnsData} for:item="row">
+                <tr key={row.key} class="slds-truncate">
+                    <template for:each={row.items} for:item="field">
+                        <template lwc:if={field.show}>
+                            <th scope="col" key={field.Id}>
+                                <c-custom-lightning-datatable-row field={field}></c-custom-lightning-datatable-row>
+                            </th>
+                        </template>
+                    </template>
+                </tr>
+            </template>
+        </tbody>
+    </table>
 
+
+    <br />
+    <br />
+    <br />
     
+    <lightning-datatable
+        key-field="Id"
+        data={rows}
+        columns={columns}></lightning-datatable>
+
 </template>
